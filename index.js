@@ -87,6 +87,9 @@ function postToSlack(attachments) {
 
 holidays()
   .then(postToSlack)
+  .catch((err) => {
+    console.log(err);
+  });
 
 process.on('uncaughtException', (err) => {
   console.log('uncaughtException', err.stack);
