@@ -1,0 +1,8 @@
+{
+  "startWeek": 7,
+  "endWeek": 13,
+  "botName": "Holiday Reminder",
+  "slackEmoji": ":calendar:",
+  "slackUrl": "",
+  "holidayUrl": ""
+}
