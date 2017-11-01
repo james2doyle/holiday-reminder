@@ -37,7 +37,7 @@ jspm_packages
 .node_repl_history
 
 # Babel transpiled code directory
-lib
+/lib
 
 #mac specific
 .DS_Store
