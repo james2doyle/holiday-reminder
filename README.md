@@ -3,6 +3,8 @@ Holiday Reminder
 
 > Sends reminders to Slack that you have upcoming holidays next week
 
+![holiday-reminder screenshot](https://raw.githubusercontent.com/james2doyle/holiday-reminder/master/screenshot.png)
+
 ## Setup
 
 * clone this repo
