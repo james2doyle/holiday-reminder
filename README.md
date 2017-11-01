@@ -3,30 +3,17 @@ Holiday Reminder
 
 > Sends reminders to Slack that you have upcoming holidays next week
 
-### Setup
+## Setup
 
 * clone this repo
 * `npm install`
-* `cp config-example.json config.json`
-* Fill in the values in the `config.json` file.
-* `npm run test`
+* `cp src/config-example.js src/config.js`
+* Fill in the values in the `src/config.js` file.
+* `npm run dev`
 
 You will need to also [setup a Slack Webhook](https://api.slack.com/custom-integrations/incoming-webhooks) for the results to be sent to.
 
-### Config
-
-```
-{
-  "startWeek": 7, // the day of the week to start on. 0 is sunday
-  "endWeek": 13,
-  "botName": "Holiday Reminder",
-  "slackEmoji": ":calendar:",
-  "slackUrl": "", // slack webhook to post to
-  "holidayUrl": "" // the json file where the holidays live
-}
-```
-
-#### Holiday JSON File
+### Holiday JSON File
 
 Example of the expected JSON file:
 
@@ -53,10 +40,51 @@ Example of the expected JSON file:
 
 It expects an object keyed by the current year, and then an array of dates in `YYYY-MM-DD` format inside of that.
 
-### Testing
+## Production
 
-Run `npm run test` to print the ending Slack call to the console.
+Run `npm start` to execute the program in production mode. You will need to run `npm run build` first. This will actually ping Slack with an `@channel` mention.
 
-### Production
+## Commands
 
-Run `npm start` to execute the program in production mode. This will actually ping Slack with an `@channel` mention.
+### Lint
+
+```
+npm run lint
+```
+
+### Build
+
+```
+npm run build
+```
+
+### Run
+
+#### ES6 code via babel
+
+```
+npm run dev
+```
+
+#### ES5 code (Transpiled)
+
+```
+npm run build
+
+node lib/
+```
+
+or
+
+```
+npm start
+```
+
+## Code Directories
+
+* ./src - source code, stays in git repo.
+* ./lib - transpiled ES5 code, not saved in git, gets published to npm.
+
+## License
+
+  [MIT](LICENSE)
