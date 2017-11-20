@@ -17,28 +17,32 @@ export default function () {
       method: 'get',
       headers: config.JSONheaders,
     })
-      .then(res => res.json())
-      .then((res) => {
-        const yearHolidays = res[moment().year()];
-        if (typeof (yearHolidays) === 'undefined') {
-          resolve();
-        }
+    .then(res => res.json())
+    .then((res) => {
+      const yearHolidays = res[moment().year()];
+      if (typeof (yearHolidays) === 'undefined') {
+        resolve();
+      }
 
-        const validHolidays = yearHolidays.filter(day =>
-          // does the day belong in the nexy week?
-           moment(day).isBetween(config.start, config.end));
+      const checkStart = config.start.subtract(1, 'days').format('YYYY-MM-DD');
+      const checkEnd = config.end.add(1, 'days').format('YYYY-MM-DD');
 
-        const attachments = validHolidays.map((day) => {
-          const dayFormatted = moment(day).format('dddd, MMMM Do YYYY');
-
-          return {
-            fallback: `${dayFormatted} is a holiday next week.`,
-            color: '#acc23a',
-            title: `${dayFormatted} is a holiday next week.`,
-          };
-        });
-
-        resolve(attachments);
+      const validHolidays = yearHolidays.filter(day => {
+        // does the day fit inside the days for the next week?
+        moment(day).isBetween(checkStart, checkEnd);
       });
+
+      const attachments = validHolidays.map((day) => {
+        const dayFormatted = moment(day).format('dddd, MMMM Do YYYY');
+
+        return {
+          fallback: `${dayFormatted} is a holiday next week.`,
+          color: '#acc23a',
+          title: `${dayFormatted} is a holiday next week.`,
+        };
+      });
+
+      resolve(attachments);
+    });
   });
 }
